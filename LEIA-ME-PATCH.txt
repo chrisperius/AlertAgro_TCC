@@ -1,0 +1,25 @@
+# Patch MVP AlertAgro — módulo de Produtos
+
+Este pacote corrigido adiciona uma primeira integração de negócio ao backend próprio e foi ajustado para a estrutura da tabela products que você mostrou (não usa a coluna updated_date):
+- GET /api/products (requer login)
+- POST /api/products (supervisor ou supervisor_geral)
+- PUT /api/products/:id (supervisor ou supervisor_geral)
+- DELETE /api/products/:id (supervisor ou supervisor_geral)
+
+Também conecta a página Produtos e o resumo de produtos do Dashboard ao endpoint próprio.
+O botão de importação de planilhas foi retirado temporariamente dessa página porque a importação ainda depende do Base44.
+
+## Como aplicar com segurança
+1. Faça uma cópia da pasta atual `D:\AlertAgro TCC`.
+2. Este é o pacote corrigido. Extraia-o dentro da pasta do projeto, mantendo a estrutura de pastas e aceitando substituir os arquivos quando solicitado. Não use o pacote anterior AlertAgro_MVP_patch.zip.
+3. NÃO apague nem substitua seu arquivo `.env`.
+4. Confirme no `.env` que `PORT=3000`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` e `JWT_SECRET` estão configurados.
+5. No terminal do backend, reinicie com `node index.js`.
+6. No terminal do frontend, rode `npm run dev` (se já estiver rodando, atualize a página).
+7. Entre com uma conta que tenha role `supervisor` ou `supervisor_geral` para cadastrar/editar/excluir produtos. Contas comuns podem consultar a lista. O cadastro cria contas com role `comum` por padrão. Para promover sua conta de teste, use o MySQL Workbench e execute, substituindo pelo e-mail da conta que você criou: `UPDATE users SET role = 'supervisor_geral' WHERE email = 'SEU_EMAIL';`. Faça isso apenas na sua conta de teste/local.
+
+## Limitações conhecidas
+- O ZIP original não inclui `.env`, então não foi possível testar a conexão com o banco real. A consulta de produtos foi ajustada para ordenar por nome, pois a estrutura informada não contém `updated_date`.
+- A integração de Culturas, Movimentações, Solicitações, Aprovações, Alertas, Relatórios, Planilha e Usuários ainda depende de chamadas Base44 e não está incluída neste patch.
+- O projeto ainda contém botões/fluxos Base44 em outras telas, incluindo login Google e importação de planilhas.
+- Teste primeiro com um produto de exemplo antes de cadastrar dados reais.

@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "Hierarquia do usu\u00e1rio no sistema",
+      "enum": ["comum", "supervisor", "supervisor_geral"],
+      "default": "comum",
+    },
+    "telefone": {
+      "type": "string",
+      "title": "Telefone",
+    },
+  },
+  "required": ["role"],
+  "name": "User",
+  "type": "object",
+}

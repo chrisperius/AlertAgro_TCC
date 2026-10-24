@@ -1,0 +1,56 @@
+{
+  "name": "Movement",
+  "type": "object",
+  "properties": {
+    "usuario_id": {
+      "type": "string",
+      "title": "ID do Usu\u00e1rio",
+    },
+    "usuario_nome": {
+      "type": "string",
+      "title": "Nome do Usu\u00e1rio",
+    },
+    "produtos_lista": {
+      "type": "array",
+      "title": "Lista de Produtos",
+      "items": {
+        "type": "object",
+        "properties": {
+          "produto_id": {
+            "type": "string",
+          },
+          "produto_nome": {
+            "type": "string",
+          },
+          "quantidade": {
+            "type": "number",
+          },
+          "preco_unitario": {
+            "type": "number",
+          },
+        },
+      },
+    },
+    "data": {
+      "type": "string",
+      "format": "date",
+      "title": "Data",
+    },
+    "status_aprovado": {
+      "type": "string",
+      "enum": ["Pendente", "Aprovado", "Recusado"],
+      "title": "Status de Aprova\u00e7\u00e3o",
+      "default": "Aprovado",
+    },
+    "tipo": {
+      "type": "string",
+      "enum": ["Entrada", "Saida"],
+      "title": "Tipo de Movimenta\u00e7\u00e3o",
+    },
+    "finalidade": {
+      "type": "string",
+      "title": "Finalidade",
+    },
+  },
+  "required": ["usuario_nome", "produtos_lista", "data", "tipo"],
+}

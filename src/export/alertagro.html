@@ -1,0 +1,322 @@
+<!-- ============================================================ -->
+<!-- AlertAgro - Estrutura HTML (Resumo)                          -->
+<!-- Plataforma de Controle de Estoque de Insumos Agrícolas       -->
+<!-- Data: 28/09/2026                                             -->
+<!-- ============================================================ -->
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AlertAgro - Plataforma inteligente de gestão e controle de estoque de insumos agrícolas com suporte a histórico, custos e fluxos de aprovação."
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <title>AlertAgro - Controle de Insumos Agrícolas</title>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="alertagro.css" />
+  </head>
+
+  <body>
+    <!-- ======================================================== -->
+    <!-- Layout Principal: Sidebar + Área de Conteúdo             -->
+    <!-- ======================================================== -->
+    <div id="root">
+      <!-- Sidebar de Navegação -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <span class="logo-icon">🌿</span>
+          <div>
+            <h2>AlertAgro</h2>
+            <p>Controle de Insumos</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <!-- Menu visível para todos os usuários -->
+          <a href="/" class="nav-item">📊 Início (Dashboard)</a>
+          <a href="/produtos" class="nav-item">📦 Produtos</a>
+          <a href="/culturas" class="nav-item">🌱 Culturas</a>
+          <a href="/movimentacoes" class="nav-item">🔄 Movimentações</a>
+          <a href="/alertas" class="nav-item">⚠️ Alertas</a>
+          <a href="/relatorios" class="nav-item">📈 Relatórios</a>
+          <a href="/planilha" class="nav-item">📋 Modo Planilha</a>
+
+          <!-- Menu visível apenas para supervisor+ -->
+          <a href="/solicitacoes" class="nav-item supervisor"
+            >📝 Solicitações</a
+          >
+
+          <!-- Menu visível apenas para supervisor_geral -->
+          <a href="/aprovacoes" class="nav-item supervisor-geral"
+            >✅ Aprovações</a
+          >
+          <a href="/usuarios" class="nav-item supervisor-geral">👥 Usuários</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p class="user-name">Christopher Devs</p>
+          <p class="user-role">Supervisor Geral</p>
+          <button class="btn-logout">⏻ Sair</button>
+        </div>
+      </aside>
+
+      <!-- ======================================================== -->
+      <!-- Página: Dashboard (Início)                               -->
+      <!-- ======================================================== -->
+      <main class="content">
+        <header>
+          <h1>Olá, Christopher!</h1>
+          <p>Você está logado como <strong>Supervisor Geral</strong>.</p>
+        </header>
+
+        <!-- Cards de Resumo -->
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon bg-green">📦</div>
+            <p class="card-value">12</p>
+            <p class="card-label">Produtos Cadastrados</p>
+          </div>
+          <div class="card">
+            <div class="card-icon bg-amber">⚠️</div>
+            <p class="card-value">2</p>
+            <p class="card-label">Alertas de Estoque Baixo</p>
+          </div>
+          <div class="card">
+            <div class="card-icon bg-blue">⬇️</div>
+            <p class="card-value">5</p>
+            <p class="card-label">Entradas Registradas</p>
+          </div>
+          <div class="card">
+            <div class="card-icon bg-rose">⬆️</div>
+            <p class="card-value">3</p>
+            <p class="card-label">Saídas Registradas</p>
+          </div>
+          <div class="card">
+            <div class="card-icon bg-emerald">🌱</div>
+            <p class="card-value">3</p>
+            <p class="card-label">Culturas</p>
+          </div>
+          <div class="card">
+            <div class="card-icon bg-slate">📈</div>
+            <p class="card-value">R$ 45.230,00</p>
+            <p class="card-label">Valor em Estoque</p>
+          </div>
+        </div>
+
+        <!-- Alerta de estoque baixo -->
+        <div class="alert-box alert-warning">
+          <h3>⚠️ Atenção: 2 produto(s) com estoque baixo</h3>
+          <p>Alguns insumos estão abaixo do estoque mínimo.</p>
+        </div>
+
+        <!-- Movimentações recentes -->
+        <div class="card">
+          <h3>Movimentações Recentes</h3>
+          <div class="movement-list">
+            <div class="movement-item">
+              <span class="movement-icon bg-blue">⬇️</span>
+              <div>
+                <p>Entrada — Christopher Devs</p>
+                <p>Finalidade: Compra mensal</p>
+              </div>
+              <span class="movement-date">28/09/2026</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- Página de Login                                          -->
+    <!-- ======================================================== -->
+    <!--
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Entrar</h1>
+        <p>Acesse sua conta AlertAgro</p>
+        <button class="btn-google">🔗 Continuar com Google</button>
+        <hr />
+        <form>
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com" />
+          <label>Senha</label>
+          <input type="password" placeholder="••••••••" />
+          <button type="submit" class="btn-primary btn-large">Entrar</button>
+        </form>
+        <a href="/forgot-password">Esqueceu a senha?</a>
+        <p>Não tem conta? <a href="/register">Criar conta</a></p>
+      </div>
+    </div>
+    -->
+
+    <!-- ======================================================== -->
+    <!-- Página de Cadastro (Register)                            -->
+    <!-- ======================================================== -->
+    <!--
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Criar sua conta</h1>
+        <button class="btn-google">🔗 Continuar com Google</button>
+        <hr />
+        <form>
+          <label>E-mail</label>
+          <input type="email" />
+          <label>Telefone</label>
+          <input type="tel" placeholder="(00) 00000-0000" />
+          <label>Senha</label>
+          <input type="password" />
+          <label>Confirmar Senha</label>
+          <input type="password" />
+          <button type="submit" class="btn-primary btn-large">Criar conta</button>
+        </form>
+      </div>
+    </div>
+    -->
+
+    <!-- ======================================================== -->
+    <!-- Página de Produtos                                       -->
+    <!-- ======================================================== -->
+    <!--
+    <main class="content">
+      <h1>Produtos</h1>
+      <p>Cadastre, edite e acompanhe seus insumos agrícolas.</p>
+
+      <div class="actions">
+        <button class="btn-outline">Importar Planilha</button>
+        <button class="btn-primary">+ Novo Produto</button>
+        <button class="btn-outline">Exportar para Excel</button>
+      </div>
+
+      <div class="filters">
+        <input type="text" placeholder="Buscar por nome..." />
+        <select>
+          <option>Todas as categorias</option>
+          <option>Fertilizante</option>
+          <option>Herbicida</option>
+          <option>Inseticida</option>
+          <option>Fungicida</option>
+        </select>
+        <select>
+          <option>Todas as DASA</option>
+          <option>Verde</option>
+          <option>Amarelo</option>
+          <option>Laranja</option>
+          <option>Vermelho</option>
+          <option>Roxo</option>
+          <option>Branco</option>
+          <option>Preto</option>
+          <option>Azul</option>
+        </select>
+      </div>
+
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Nome</th><th>Categoria</th><th>Qtd.</th>
+            <th>DASA</th><th>Toxicidade</th><th>Embalagem</th>
+            <th>Preço Unit.</th><th>P. Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="estoque-ok">
+            <td>Ureia 45-00-00</td><td>Fertilizante</td><td>150</td>
+            <td><span class="dasa-verde">Verde</span></td>
+            <td><span class="tox-baixo">Baixo</span></td>
+            <td>50 kg</td><td>R$ 85,00</td><td>R$ 12.750,00</td>
+          </tr>
+          <tr class="estoque-baixo">
+            <td>Glifosato</td><td>Herbicida</td><td>5</td>
+            <td><span class="dasa-laranja">Laranja</span></td>
+            <td><span class="tox-alto">Alto</span></td>
+            <td>5 litro</td><td>R$ 45,00</td><td>R$ 225,00</td>
+          </tr>
+          <tr class="estoque-zerado">
+            <td>Cloreto de Potássio</td><td>Fertilizante</td><td>0</td>
+            <td><span class="dasa-vermelho">Vermelho</span></td>
+            <td><span class="tox-medio">Médio</span></td>
+            <td>50 kg</td><td>R$ 120,00</td><td>R$ 0,00</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    -->
+
+    <!-- ======================================================== -->
+    <!-- Modal: Formulário de Produto                             -->
+    <!-- ======================================================== -->
+    <!--
+    <div class="modal-overlay">
+      <div class="modal">
+        <h2>Cadastrar Novo Produto</h2>
+        <form>
+          <label>Nome do Produto *</label>
+          <input type="text" />
+
+          <label>Categoria *</label>
+          <select>
+            <option>Fertilizante</option>
+            <option>Herbicida</option>
+            <option>Inseticida</option>
+            <option>Fungicida</option>
+            <option>Acaricida</option>
+            <option>Outros</option>
+          </select>
+
+          <label>Tipo de Categoria *</label>
+          <select><option>NPK</option><option>NFP</option></select>
+
+          <label>Quantidade em Estoque *</label>
+          <input type="number" value="0" />
+
+          <label>Estoque Mínimo (alerta)</label>
+          <input type="number" value="0" />
+
+          <label>Horário de Aplicação</label>
+          <input type="time" />
+
+          <label>Nível de Toxicidade *</label>
+          <select>
+            <option>Baixo</option><option>Médio</option>
+            <option>Alto</option><option>Extremo</option>
+          </select>
+
+          <label>Classificação DASA (Cor) *</label>
+          <select>
+            <option>Verde</option><option>Amarelo</option>
+            <option>Laranja</option><option>Vermelho</option>
+            <option>Roxo</option><option>Branco</option>
+            <option>Preto</option><option>Azul</option>
+          </select>
+
+          <label>Nome Científico</label>
+          <input type="text" />
+
+          <label>Características</label>
+          <textarea></textarea>
+
+          <label>Tipo de Embalagem *</label>
+          <select><option>kg</option><option>litro</option></select>
+
+          <label>Quantidade por Embalagem *</label>
+          <input type="number" />
+
+          <label>Preço Unitário (R$) *</label>
+          <input type="number" />
+
+          <div class="modal-actions">
+            <button type="button" class="btn-outline">Cancelar</button>
+            <button type="submit" class="btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    -->
+
+    <script src="alertagro.js"></script>
+  </body>
+</html>

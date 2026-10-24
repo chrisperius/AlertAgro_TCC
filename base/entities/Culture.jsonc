@@ -1,0 +1,33 @@
+{
+  "name": "Culture",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "title": "Nome da Cultura",
+    },
+    "area_hectares": {
+      "type": "number",
+      "title": "\u00c1rea (hectares)",
+    },
+    "produtos_quantidade": {
+      "type": "array",
+      "title": "Produtos e Quantidades por Hectare",
+      "items": {
+        "type": "object",
+        "properties": {
+          "produto_id": {
+            "type": "string",
+          },
+          "produto_nome": {
+            "type": "string",
+          },
+          "quantidade_por_hectare": {
+            "type": "number",
+          },
+        },
+      },
+    },
+  },
+  "required": ["nome", "area_hectares"],
+}

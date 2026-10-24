@@ -1,0 +1,89 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "title": "Nome do Produto",
+    },
+    "categoria": {
+      "type": "string",
+      "title": "Categoria",
+    },
+    "categoria_tipo": {
+      "type": "string",
+      "enum": ["NPK", "NFP"],
+      "title": "Tipo de Categoria",
+    },
+    "quantidade": {
+      "type": "number",
+      "title": "Quantidade em Estoque",
+      "default": 0,
+    },
+    "nivel_toxicidade": {
+      "type": "string",
+      "enum": ["Baixo", "M\u00e9dio", "Alto", "Extremo"],
+      "title": "N\u00edvel de Toxicidade (Perigo)",
+    },
+    "dasa_cor": {
+      "type": "string",
+      "enum": [
+        "Verde",
+        "Amarelo",
+        "Laranja",
+        "Vermelho",
+        "Roxo",
+        "Branco",
+        "Preto",
+        "Azul",
+      ],
+      "title": "Classifica\u00e7\u00e3o DASA (Cor)",
+    },
+    "nome_cientifico": {
+      "type": "string",
+      "title": "Nome Cient\u00edfico",
+    },
+    "caracteristica": {
+      "type": "string",
+      "title": "Caracter\u00edsticas",
+    },
+    "horario": {
+      "type": "string",
+      "format": "time",
+      "title": "Hor\u00e1rio de Aplica\u00e7\u00e3o",
+    },
+    "embalagem_tipo": {
+      "type": "string",
+      "enum": ["kg", "litro"],
+      "title": "Tipo de Embalagem",
+    },
+    "embalagem_quantidade": {
+      "type": "number",
+      "title": "Quantidade por Embalagem",
+    },
+    "preco": {
+      "type": "number",
+      "title": "Pre\u00e7o Unit\u00e1rio (R$)",
+    },
+    "preco_total": {
+      "type": "number",
+      "title": "Pre\u00e7o Total (R$)",
+    },
+    "estoque_minimo": {
+      "type": "number",
+      "title": "Estoque M\u00ednimo para Alerta",
+      "default": 0,
+    },
+  },
+  "required": [
+    "nome",
+    "categoria",
+    "categoria_tipo",
+    "quantidade",
+    "nivel_toxicidade",
+    "dasa_cor",
+    "embalagem_tipo",
+    "embalagem_quantidade",
+    "preco",
+  ],
+}
