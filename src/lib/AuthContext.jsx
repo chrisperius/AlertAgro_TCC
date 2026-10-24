@@ -5,10 +5,9 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
+import { apiRequest } from "@/api/apiClient";
 
 const AuthContext = createContext(null);
-
-const API_URL = "http://localhost:3000/api";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -33,17 +32,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoadingAuth(true);
 
     try {
-      const response = await fetch(`${API_URL}/auth/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Sessão inválida.");
-      }
+      const data = await apiRequest("/auth/me");
 
       setUser(data.user);
       setIsAuthenticated(true);

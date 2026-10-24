@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 import { safeReturnTo } from "@/lib/authReturnTo";
+import { apiRequest } from "@/api/apiClient";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,19 +22,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const data = await apiRequest("/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({ email, password }),
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Não foi possível entrar.");
-      }
 
       if (!data.token) {
         throw new Error("O servidor não retornou o token de acesso.");

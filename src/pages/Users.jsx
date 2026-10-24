@@ -1,28 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Users as UsersIcon, Mail, Phone, Shield } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
+import { apiRequest } from "@/api/apiClient";
 
-const API_URL = "http://localhost:3000/api";
 const roleLabels = {
   comum: "Comum",
   supervisor: "Supervisor",
   supervisor_geral: "Supervisor Geral",
 };
-
-async function apiRequest(path, options = {}) {
-  const token = localStorage.getItem("alertagro_token");
-  const response = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {}),
-    },
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.message || `Falha na solicitação (${response.status}).`);
-  return data;
-}
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);

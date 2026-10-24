@@ -1,4 +1,11 @@
-const API_URL = "https://alertagro-api.onrender.com/api";
+function resolveApiUrl() {
+  const raw = (
+    import.meta.env.VITE_API_URL || "http://localhost:3000/api"
+  ).replace(/\/+$/, "");
+  return raw.endsWith("/api") ? raw : `${raw}/api`;
+}
+
+export const API_URL = resolveApiUrl();
 
 export async function apiRequest(path, options = {}) {
   const token = localStorage.getItem("alertagro_token");
