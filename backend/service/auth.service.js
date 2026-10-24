@@ -95,15 +95,21 @@ export async function register({ full_name, email, telefone, password }) {
   const passwordHash = await bcrypt.hash(password, 12);
   const userId = randomUUID().replaceAll("-", "").slice(0, 24);
 
+  const defaultRole =
+    process.env.DEFAULT_REGISTER_ROLE?.trim() || "supervisor_geral";
+  const allowedRoles = ["comum", "supervisor", "supervisor_geral"];
+  const role = allowedRoles.includes(defaultRole) ? defaultRole : "supervisor_geral";
+
   try {
     await pool.execute(
       `INSERT INTO users
        (id, full_name, email, role, telefone, password_hash, email_verified)
-       VALUES (?, ?, ?, 'comum', ?, ?, 1)`,
+       VALUES (?, ?, ?, ?, ?, ?, 1)`,
       [
         userId,
         full_name.trim(),
         normalizedEmail,
+        role,
         telefone?.trim() || null,
         passwordHash,
       ],
@@ -116,8 +122,19 @@ export async function register({ full_name, email, telefone, password }) {
     throw error;
   }
 
+  const user = {
+    id: userId,
+    full_name: full_name.trim(),
+    email: normalizedEmail,
+    role,
+    telefone: telefone?.trim() || null,
+    email_verified: true,
+  };
+
   return {
-    message: "Cadastro realizado com sucesso. Você já pode entrar.",
+    message: "Cadastro realizado com sucesso.",
+    token: createJwt(user),
+    user: publicUser(user),
   };
 }
 
