@@ -1,5 +1,7 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import jwt from "jsonwebtoken";
 import { pool } from "./backend/database/db.js";
 import authRoutes from "./backend/route/auth.routes.js";
 import { errorHandler } from "./backend/controller/auth.controller.js";
@@ -28,6 +30,27 @@ app.get("/api/teste", async (req, res) => {
     console.error(err);
     res.status(500).json({ ok: false, erro: err.message });
   }
+});
+
+app.get("/api/health", async (_req, res) => {
+  const health = { ok: true, database: false, jwt: false };
+  try {
+    await pool.query("SELECT 1");
+    health.database = true;
+  } catch (error) {
+    health.ok = false;
+    health.databaseError = error.message;
+  }
+  try {
+    const secret = process.env.JWT_SECRET?.trim();
+    if (!secret) throw new Error("JWT_SECRET ausente ou vazio");
+    jwt.sign({ ping: 1 }, secret, { expiresIn: "1s" });
+    health.jwt = true;
+  } catch (error) {
+    health.ok = false;
+    health.jwtError = error.message;
+  }
+  res.status(health.ok ? 200 : 503).json(health);
 });
 
 const PORT = process.env.PORT || 3000;

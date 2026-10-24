@@ -14,13 +14,55 @@ const publicUser = (row) => ({
   email_verified: Boolean(row.email_verified),
 });
 
+let resolvedJwtExpiresIn;
+
+function getJwtExpiresIn() {
+  if (resolvedJwtExpiresIn) return resolvedJwtExpiresIn;
+  const raw = process.env.JWT_EXPIRES_IN?.trim();
+  if (!raw) {
+    resolvedJwtExpiresIn = "1h";
+    return resolvedJwtExpiresIn;
+  }
+  try {
+    jwt.sign({ ping: 1 }, "jwt-expires-in-check", { expiresIn: raw });
+    resolvedJwtExpiresIn = raw;
+  } catch {
+    console.warn(
+      `[auth] JWT_EXPIRES_IN inválido (${JSON.stringify(raw)}); usando "1h".`,
+    );
+    resolvedJwtExpiresIn = "1h";
+  }
+  return resolvedJwtExpiresIn;
+}
+
 function createJwt(user) {
-  if (!process.env.JWT_SECRET)
-    throw new Error("JWT_SECRET não configurado no .env.");
-  return jwt.sign({ role: user.role }, process.env.JWT_SECRET, {
-    subject: user.id,
-    expiresIn: process.env.JWT_EXPIRES_IN || "1h",
-  });
+  const secret = process.env.JWT_SECRET?.trim();
+  if (!secret) {
+    const e = new Error(
+      "JWT_SECRET não configurado no servidor. Defina a variável no Render.",
+    );
+    e.status = 503;
+    throw e;
+  }
+  if (!user?.id) {
+    const e = new Error("Usuário sem identificador válido.");
+    e.status = 500;
+    throw e;
+  }
+  try {
+    return jwt.sign(
+      { sub: user.id, role: user.role },
+      secret,
+      { expiresIn: getJwtExpiresIn() },
+    );
+  } catch (error) {
+    console.error("[auth] Falha ao emitir JWT:", error.message);
+    const e = new Error(
+      "Não foi possível gerar o token de acesso. Verifique JWT_SECRET e JWT_EXPIRES_IN no Render.",
+    );
+    e.status = 503;
+    throw e;
+  }
 }
 
 async function createEmailToken(connection, userId, purpose, minutes) {
